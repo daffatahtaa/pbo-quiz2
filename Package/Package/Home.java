@@ -10,13 +10,15 @@ package Package;
  *
  * @author bagas
  */
-public class Home extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame implements DateTime{
 
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
+        codeField.setEnabled(Boolean.FALSE);
+        codeField.disable();
     }
 
     /**
@@ -30,16 +32,16 @@ public class Home extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        ItemComboBox = new javax.swing.JComboBox<>();
-        CodeField = new javax.swing.JTextField();
+        itemComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        NewButton = new javax.swing.JButton();
-        AddButton = new javax.swing.JButton();
-        RemoveButton = new javax.swing.JButton();
-        SaveButton = new javax.swing.JButton();
-        CancelButton = new javax.swing.JButton();
-        InputTextField = new javax.swing.JTextField();
+        newButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        inputTextField = new javax.swing.JTextField();
+        codeField = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,16 +49,11 @@ public class Home extends javax.swing.JFrame {
 
         jLabel2.setText("Items");
 
-        ItemComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kopi", "Susu", "Gula", " " }));
-        ItemComboBox.addActionListener(new java.awt.event.ActionListener() {
+        itemComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kopi", "Susu", "Gula", " " }));
+        itemComboBox.setSelectedIndex(-1);
+        itemComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ItemComboBoxActionPerformed(evt);
-            }
-        });
-
-        CodeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CodeFieldActionPerformed(evt);
+                itemComboBoxActionPerformed(evt);
             }
         });
 
@@ -86,35 +83,42 @@ public class Home extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        NewButton.setText("New");
-        NewButton.addActionListener(new java.awt.event.ActionListener() {
+        newButton.setText("New");
+        newButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewButtonActionPerformed(evt);
+                newButtonActionPerformed(evt);
             }
         });
 
-        AddButton.setText("Add");
-        AddButton.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddButtonActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
-        RemoveButton.setText("Remove");
-        RemoveButton.addActionListener(new java.awt.event.ActionListener() {
+        removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoveButtonActionPerformed(evt);
+                removeButtonActionPerformed(evt);
             }
         });
 
-        SaveButton.setText("Save");
-        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveButtonActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
-        CancelButton.setText("Cancel");
+        cancelButton.setText("Cancel");
+
+        codeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyymmdd"))));
+        codeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codeFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,27 +130,27 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ItemComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(itemComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(InputTextField))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CodeField))
+                        .addComponent(inputTextField))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(SaveButton)
+                                .addComponent(saveButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(CancelButton))
+                                .addComponent(cancelButton))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                        .addGap(0, 6, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(codeField)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AddButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RemoveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NewButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(removeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(newButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -155,56 +159,54 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(CodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NewButton))
+                    .addComponent(newButton)
+                    .addComponent(codeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ItemComboBox)
-                    .addComponent(AddButton)
-                    .addComponent(InputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(itemComboBox)
+                    .addComponent(addButton)
+                    .addComponent(inputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RemoveButton))
+                    .addComponent(removeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaveButton)
-                    .addComponent(CancelButton))
+                    .addComponent(saveButton)
+                    .addComponent(cancelButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CodeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CodeFieldActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_CodeFieldActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+    private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SaveButtonActionPerformed
+    }//GEN-LAST:event_itemComboBoxActionPerformed
 
-    private void ItemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ItemComboBoxActionPerformed
-
-    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // TODO add your handling code here:
         
         
         
-    }//GEN-LAST:event_RemoveButtonActionPerformed
+    }//GEN-LAST:event_removeButtonActionPerformed
 
-    private void NewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewButtonActionPerformed
+    private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NewButtonActionPerformed
+    }//GEN-LAST:event_newButtonActionPerformed
 
-    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddButtonActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void codeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codeFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,17 +244,17 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddButton;
-    private javax.swing.JButton CancelButton;
-    private javax.swing.JTextField CodeField;
-    private javax.swing.JTextField InputTextField;
-    private javax.swing.JComboBox<String> ItemComboBox;
-    private javax.swing.JButton NewButton;
-    private javax.swing.JButton RemoveButton;
-    private javax.swing.JButton SaveButton;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JFormattedTextField codeField;
+    private javax.swing.JTextField inputTextField;
+    private javax.swing.JComboBox<String> itemComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton newButton;
+    private javax.swing.JButton removeButton;
+    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }

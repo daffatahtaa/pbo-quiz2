@@ -29,33 +29,33 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="ItemComboBox" min="-2" pref="262" max="-2" attributes="0"/>
+                      <Component id="itemComboBox" min="-2" pref="262" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="InputTextField" max="32767" attributes="0"/>
+                      <Component id="inputTextField" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="CodeField" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="SaveButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="CancelButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="codeField" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="AddButton" max="32767" attributes="0"/>
-                  <Component id="RemoveButton" max="32767" attributes="0"/>
-                  <Component id="NewButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="addButton" max="32767" attributes="0"/>
+                  <Component id="removeButton" max="32767" attributes="0"/>
+                  <Component id="newButton" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -67,25 +67,25 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CodeField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="NewButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="newButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="codeField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="ItemComboBox" alignment="3" max="32767" attributes="0"/>
-                  <Component id="AddButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="InputTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="itemComboBox" alignment="3" max="32767" attributes="0"/>
+                  <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
-                  <Component id="RemoveButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="removeButton" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="SaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -103,7 +103,7 @@
         <Property name="text" type="java.lang.String" value="Items"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="ItemComboBox">
+    <Component class="javax.swing.JComboBox" name="itemComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -113,18 +113,14 @@
             <StringItem index="3" value=" "/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemComboBoxActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemComboBoxActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="CodeField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CodeFieldActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -168,44 +164,54 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="NewButton">
+    <Component class="javax.swing.JButton" name="newButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="New"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NewButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="AddButton">
+    <Component class="javax.swing.JButton" name="addButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="RemoveButton">
+    <Component class="javax.swing.JButton" name="removeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="SaveButton">
+    <Component class="javax.swing.JButton" name="saveButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="CancelButton">
+    <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="InputTextField">
+    <Component class="javax.swing.JTextField" name="inputTextField">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="codeField">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="yyyymmdd" subtype="-1" type="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codeFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
