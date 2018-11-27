@@ -1,5 +1,8 @@
 package Package;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +13,7 @@ package Package;
  *
  * @author bagas
  */
-public class Home extends javax.swing.JFrame implements DateTime{
+public class Home extends javax.swing.JFrame{
 
     /**
      * Creates new form Home
@@ -19,7 +22,16 @@ public class Home extends javax.swing.JFrame implements DateTime{
         initComponents();
         codeField.setEnabled(Boolean.FALSE);
         codeField.disable();
+        
+        
+
     }
+    Date showDate(){
+        Date date = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("yyymmdd");
+        return date;
+    }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -198,6 +210,7 @@ public class Home extends javax.swing.JFrame implements DateTime{
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:
+        codeField.setValue(showDate());
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
