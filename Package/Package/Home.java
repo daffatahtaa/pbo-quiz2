@@ -1,7 +1,11 @@
 package Package;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,8 +24,17 @@ public class Home extends javax.swing.JFrame{
      */
     public Home() {
         initComponents();
+        
+        
         codeField.setEnabled(Boolean.FALSE);
-        codeField.disable();
+        inputTextField.setEnabled(Boolean.FALSE);
+        removeButton.setEnabled(Boolean.FALSE);
+        addButton.setEnabled(Boolean.FALSE);
+        itemComboBox.setEnabled(Boolean.FALSE);
+        saveButton.setEnabled(Boolean.FALSE);
+        cancelButton.setEnabled(Boolean.FALSE);
+        
+        
         
         
 
@@ -124,6 +137,11 @@ public class Home extends javax.swing.JFrame{
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         codeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyymmdd"))));
         codeField.addActionListener(new java.awt.event.ActionListener() {
@@ -195,10 +213,12 @@ public class Home extends javax.swing.JFrame{
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_itemComboBoxActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
@@ -210,16 +230,45 @@ public class Home extends javax.swing.JFrame{
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:
-        codeField.setValue(showDate());
+        int i = 0;
+        i++;
+        
+        
+        Date dateObj = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("yyymmdd");
+        String date = sf.format(dateObj);
+        
+        NumberFormat formatter = new DecimalFormat("00");
+        String s = formatter.format(i);
+    
+        codeField.setEnabled(Boolean.FALSE);
+        inputTextField.setEnabled(Boolean.TRUE);
+        removeButton.setEnabled(Boolean.TRUE);
+        addButton.setEnabled(Boolean.TRUE);
+        itemComboBox.setEnabled(Boolean.TRUE);
+        saveButton.setEnabled(Boolean.TRUE);
+        cancelButton.setEnabled(Boolean.TRUE);
+
+        
+        codeField.setText(date+s);
+        
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void codeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codeFieldActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+        
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +301,8 @@ public class Home extends javax.swing.JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
+                
+                
             }
         });
     }
