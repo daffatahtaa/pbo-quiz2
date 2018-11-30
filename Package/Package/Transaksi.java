@@ -26,6 +26,10 @@ public class Transaksi {
         this.kode = kode;
         this.total = total;
     }
+
+    Transaksi(String kode, ArrayList<ItemArray> pembelian) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public void hitungTotal(){
         float total = 0;
         for (ItemArray item : this.item) {
