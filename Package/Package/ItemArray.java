@@ -7,16 +7,34 @@
 package Package;
 
 import java.util.ArrayList;
+import java.util.List;
+import Package.Home;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 
 /**
  *
  * @author Expression daffa is undefined on line 12, column 14 in Templates/Classes/Class.java.
  */
-public class ItemArray {
+public class ItemArray{
+
     
-    ArrayList<String> al = new ArrayList<>();
+    
+    //ArrayList<String> item = new ArrayList<String>();
+    
     private String nama;
-    private int harga;
+    private int jumlah;
+    private float harga;
+    
+    static void add(String item) {
+        
+    }
+
+    public ItemArray(String nama, int jumlah, float harga) {
+        this.nama = nama;
+        this.jumlah = jumlah;
+        this.harga = harga;
+    }
 
     public String getNama() {
         return nama;
@@ -26,24 +44,31 @@ public class ItemArray {
         this.nama = nama;
     }
 
-    public int getHarga() {
+    public int getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(int jumlah) {
+        this.jumlah = jumlah;
+    }
+
+    public float getHarga() {
         return harga;
     }
 
-    public void setHarga(int harga) {
+    public void setHarga(float harga) {
         this.harga = harga;
-    }
-
-    public ItemArray(String nama, int harga) {
-        this.nama = nama;
-        this.harga = harga;
-    }
-
-    public ItemArray() {
     }
     
-    @Override
-    public String toString(){
-        return nama;
+    public float total(){
+        return this.harga * this.jumlah;
     }
+    
+    public String toString(){
+        return this.nama;
+    }
+
+    
+    
+    
 }
