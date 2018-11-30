@@ -23,14 +23,14 @@ public class ItemArray{
     //ArrayList<String> item = new ArrayList<String>();
     
     private String nama;
-    private int jumlah;
+    private float jumlah;
     private float harga;
     
     static void add(String item) {
         
     }
 
-    public ItemArray(String nama, int jumlah, float harga) {
+    public ItemArray(String nama, float jumlah, float harga) {
         this.nama = nama;
         this.jumlah = jumlah;
         this.harga = harga;
@@ -45,7 +45,7 @@ public class ItemArray{
     }
 
     public int getJumlah() {
-        return jumlah;
+        return (int) jumlah;
     }
 
     public void setJumlah(int jumlah) {
