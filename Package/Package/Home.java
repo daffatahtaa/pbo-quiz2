@@ -1,10 +1,11 @@
 package Package;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 /*
@@ -18,14 +19,25 @@ import java.util.ArrayList;
  * @author bagas
  */
 public class Home extends javax.swing.JFrame{
-
+    
     /**
      * Creates new form Home
      */
+    private int id = 0;
+    private String kode;
+    private DefaultTableModel tableModel;
+    private DefaultComboBoxModel ComboModel;
+    private ArrayList<ItemArray> pembelian = new ArrayList<>();
+    
     public Home() {
+        SetBarang setB = new SetBarang();
+        this.ComboModel = new DefaultComboBoxModel<>(setB.getNamaItem().toArray());
+        
+        TblTransaksi table = new TblTransaksi();
+        this.tableModel = new DefaultTableModel(table.getKolomNama(), 0);
+        
         initComponents();
-        
-        
+                
         codeField.setEnabled(Boolean.FALSE);
         inputTextField.setEnabled(Boolean.FALSE);
         removeButton.setEnabled(Boolean.FALSE);
@@ -34,17 +46,97 @@ public class Home extends javax.swing.JFrame{
         saveButton.setEnabled(Boolean.FALSE);
         cancelButton.setEnabled(Boolean.FALSE);
         
+    }
+    
+    public void tId(){
+        this.id += 1 ;
+    }
+    
+    public void kId(){
+        this.id -= 1;
+    }
+    
+    private Object [] tambahItem (String nama, int jumlah){
+        float harga = 0;
+        SetBarang barang = new SetBarang();
+        for (int i = 0; i < barang.getHargaBarang().size(); i++) {
+            if (nama.equalsIgnoreCase(barang.getNamaItem().get(i))) {
+                harga = barang.getHargaBarang().get(i);
+            }
+        }
+        Object [] obj = {
+            nama,
+            harga,
+            jumlah
+        };
+        return obj;
+    }
+    
+    private String setCode(){
+        this.tId();
         
+        Date dateObj = new Date();
+        String sf = new SimpleDateFormat("yyymmdd").format(new Date());
+        this.kode = String.format(sf + "%02d", this.id);
         
-        
+        return kode;
+    }
+    
+    private void jumlah (String nama, int add){
+        ArrayList<String> item = new ArrayList<>();
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            item.add(tableModel.getValueAt(i, 0).toString());
+            
+        }
+        for (int i = 0; i < item.size(); i++) {
+            if (item.get(i).equals(nama)) {
+                int jumlah = new Integer(tableModel.getValueAt(i, 2).toString());
+                tableModel.setValueAt(jumlah +add , i, 2);
+            }
+        }
+    }
+    private boolean CekSelected (String nama){
+        boolean result = false;
+        ArrayList<String> item = new ArrayList<>();
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            item.add(tableModel.getValueAt(i, 0).toString());
+        }
+        for (String i : item) {
+            if (i.equals(nama)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+    
+    private void beli(){
+        if (isEmpty()) {
+            saveButton.setEnabled(false);
+            cancelButton.setEnabled(false);
+        }else{
+            saveButton.setEnabled(true);
+            cancelButton.setEnabled(true);
+            
+        }
+    }
 
+    private boolean isEmpty(){
+        return jTable1.getModel().getRowCount() <= 0;
     }
-    Date showDate(){
-        Date date = new Date();
-        SimpleDateFormat sf = new SimpleDateFormat("yyymmdd");
-        return date;
+    
+    private void transaksi(){
+        inputTextField.setText("");
+        codeField.setText("");
+        newButton.setEnabled(true);
+        saveButton.setEnabled(false);
+        cancelButton.setEnabled(false);
+        addButton.setEnabled(false);
+        removeButton.setEnabled(false);
+        inputTextField.setEnabled(false);
+        itemComboBox.setEnabled(false);
+        tableModel.setRowCount(0);
+        this.pembelian.clear();
     }
-        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,8 +166,7 @@ public class Home extends javax.swing.JFrame{
 
         jLabel2.setText("Items");
 
-        itemComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kopi", "Susu", "Gula", " " }));
-        itemComboBox.setSelectedIndex(-1);
+        itemComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kopi", "Susu", "Gula", "" }));
         itemComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemComboBoxActionPerformed(evt);
@@ -84,7 +175,6 @@ public class Home extends javax.swing.JFrame{
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
@@ -213,51 +303,68 @@ public class Home extends javax.swing.JFrame{
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                String nama = tableModel.getValueAt(i, 0).toString();
+                float harga = new Float (tableModel.getValueAt(i, 1).toString());
+                float jumlah = new Integer (tableModel.getValueAt(i, 1).toString());
+                this.pembelian.add(new ItemArray(nama, harga, jumlah));
+            }
+            
+            Transaksi transaksi = new Transaksi(this.kode, this.pembelian);
+            StringBuilder sbr = new StringBuilder();
+            sbr.append(transaksi.Pembayaran());
+            JOptionPane.showMessageDialog(this,sbr, "Transaksi", JOptionPane.INFORMATION_MESSAGE);
+            transaksi();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_itemComboBoxActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+        if (jTable1.getSelectedRow() <0) {
+            String sbr = "Pilih item yang mau di hapus";
+            JOptionPane.showMessageDialog(this,sbr,"Information",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            int count = jTable1.getSelectedRows().length;
+            for (int i = 0; i < count; i++) {
+                tableModel.removeRow(jTable1.getSelectedRow());
+            }
+            
+        }
+       this.beli();
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         // TODO add your handling code here:
-        int i = 0;
-        i++;
+        this.inputTextField.setText("1");
+        this.newButton.setEnabled(false);
+        this.cancelButton.setEnabled(true);
+        this.addButton.setEnabled(true);
+        this.inputTextField.setEnabled(true);
+        this.itemComboBox.setEnabled(true);
+        this.codeField.setText(this.setCode());
         
-        
-        Date dateObj = new Date();
-        SimpleDateFormat sf = new SimpleDateFormat("yyymmdd");
-        String date = sf.format(dateObj);
-        
-        NumberFormat formatter = new DecimalFormat("00");
-        String s = formatter.format(i);
-    
-        codeField.setEnabled(Boolean.FALSE);
-        inputTextField.setEnabled(Boolean.TRUE);
-        removeButton.setEnabled(Boolean.TRUE);
-        addButton.setEnabled(Boolean.TRUE);
-        itemComboBox.setEnabled(Boolean.TRUE);
-        saveButton.setEnabled(Boolean.TRUE);
-        cancelButton.setEnabled(Boolean.TRUE);
-
-        
-        codeField.setText(date+s);
+        //codeField.setText(date+s);
         
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        
-        
+        String nama = this.itemComboBox.getSelectedItem().toString();
+        int jumlah = new Integer(this.inputTextField.getText());
+        if (CekSelected(nama)) {
+            jumlah(nama,jumlah);
+        }else{
+            tableModel.addRow(tambahItem(nama, jumlah));
+        }
+        this.beli();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void codeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeFieldActionPerformed
@@ -266,7 +373,8 @@ public class Home extends javax.swing.JFrame{
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        transaksi();
+        this.kId();
         
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -275,6 +383,7 @@ public class Home extends javax.swing.JFrame{
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        Home obj = new Home();
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -298,10 +407,15 @@ public class Home extends javax.swing.JFrame{
         //</editor-fold>
 
         /* Create and display the form */
+        try {
+            
+                
+            
+        } catch (Exception e) {
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
-                
                 
             }
         });

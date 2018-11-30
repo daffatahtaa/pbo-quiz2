@@ -110,10 +110,9 @@
             <StringItem index="0" value="Kopi"/>
             <StringItem index="1" value="Susu"/>
             <StringItem index="2" value="Gula"/>
-            <StringItem index="3" value=" "/>
+            <StringItem index="3" value=""/>
           </StringArray>
         </Property>
-        <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemComboBoxActionPerformed"/>
@@ -132,7 +131,7 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="4">
+              <Table columnCount="3" rowCount="3">
                 <Column editable="false" title="Nama" type="java.lang.Object"/>
                 <Column editable="false" title="Harga" type="java.lang.Object"/>
                 <Column editable="false" title="Jumlah" type="java.lang.Object"/>
